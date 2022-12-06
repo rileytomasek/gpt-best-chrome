@@ -2,7 +2,7 @@
 
 Chrome Extension for [gpt.best](https:/gpt.best) that adds a share button to ChatGPT. Clicking it will create a shared link (eg: [gpt.best/kkYN0o6p](https://gpt.best/kkYN0o6p)) and open it in a new tab.
 
-[Demo video](https://img.rile.yt/4ahEbp)
+https://user-images.githubusercontent.com/895082/205776984-333f9fb8-5d25-40c2-8329-9a92297fdafa.mp4
 
 ## Installation
 
