@@ -1,11 +1,16 @@
 let loading = false;
+let observer;
 
 function start() {
   injectShareButton();
+  observeDOMChanges();
 }
 
 function injectShareButton() {
   const container = document.querySelector("main form > div");
+  if (!container) return;
+  const existingShareButton = container.querySelector(".gptbest-share-button");
+  if (existingShareButton) return;
   const shareButton = createButton();
   shareButton.addEventListener("click", save);
   container.appendChild(shareButton);
@@ -41,6 +46,7 @@ function createButton() {
   shareButton.style.right = "-42px";
   shareButton.style.bottom = "10px";
   shareButton.appendChild(createShareIcon());
+  shareButton.classList.add("gptbest-share-button");
   return shareButton;
 }
 
@@ -52,6 +58,24 @@ function createShareIcon() {
   svg.setAttribute("fill", "currentColor");
   svg.innerHTML = `<path d="M26,28H6a2.0027,2.0027,0,0,1-2-2V6A2.0027,2.0027,0,0,1,6,4H16V6H6V26H26V16h2V26A2.0027,2.0027,0,0,1,26,28Z"/><polygon points="20 2 20 4 26.586 4 18 12.586 19.414 14 28 5.414 28 12 30 12 30 2 20 2"/>`;
   return svg;
+}
+
+function observeDOMChanges() {
+  const targetNode = document.querySelector("#__next");
+  if (!targetNode) return;
+
+  const config = { subtree: false, childList: true };
+
+  const callback = function (mutationsList, observer) {
+    mutationsList.forEach(function (mutation) {
+      if (mutation.addedNodes.length > 0) {
+        injectShareButton();
+      }
+    });
+  };
+
+  observer = new MutationObserver(callback);
+  observer.observe(targetNode, config);
 }
 
 start();

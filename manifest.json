@@ -1,9 +1,8 @@
 {
   "name": "gpt.best",
   "description": "Share ChatGPT Transcripts",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "manifest_version": 3,
-  "permissions": ["activeTab"],
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
@@ -12,7 +11,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://chat.openai.com/chat"],
+      "matches": ["https://chat.openai.com/chat*"],
       "js": ["script.js"],
       "run_at": "document_end"
     }
